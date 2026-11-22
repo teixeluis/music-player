@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon MIDI Studio Player | Multi-Instrument Web Audio Player</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎹</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Drag & Drop Overlay -->
+  <div id="dropOverlay" class="drop-overlay">
+    <div class="drop-content">
+      <div class="drop-icon">🎵</div>
+      <h2>Drop MIDI File Here</h2>
+      <p>Supports Standard MIDI Files (.mid, .midi)</p>
+    </div>
+  </div>
+
+  <div class="app-container">
+    <!-- Top Navigation Bar -->
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-icon">🎹</span>
+        <div class="brand-text">
+          <h1>NEON MIDI STUDIO</h1>
+          <span class="brand-subtitle">8+ Instrument Web Audio Synthesizer</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <label for="midiFileInput" class="btn btn-outline" title="Open any MIDI file from your computer">
+          <span>📁 Open MIDI</span>
+          <input type="file" id="midiFileInput" accept=".mid,.midi" style="display: none;">
+        </label>
+        <button id="downloadMidiBtn" class="btn btn-outline" title="Download the current song as a standard .mid file">
+          <span>💾 Download .MID</span>
+        </button>
+        <button id="shortcutsBtn" class="btn btn-icon" title="Keyboard Shortcuts">
+          <span>⌨️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Preset Songs Selector Strip -->
+    <section class="songs-selector-section">
+      <div class="section-header">
+        <span class="section-title">CHOOSE A PRESET SONG (EACH FEATURES 8+ INSTRUMENTS):</span>
+        <span class="badge badge-info">Select at your discretion</span>
+      </div>
+      <div class="songs-carousel" id="songsCarousel">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- Main Player Stage -->
+    <main class="player-stage">
+      <!-- Active Song Metadata Banner -->
+      <div class="song-meta-banner">
+        <div class="meta-left">
+          <div class="song-title-row">
+            <h2 id="songTitle">Select a Song</h2>
+            <span id="genreBadge" class="badge badge-genre">Cinematic</span>
+            <span id="bpmBadge" class="badge badge-bpm">108 BPM</span>
+            <span id="instrumentsCountBadge" class="badge badge-instruments">9 Instruments</span>
+          </div>
+          <p id="songDescription" class="song-description">Loading song description...</p>
+        </div>
+
+        <div class="meta-right">
+          <!-- Visualizer Mode Tabs -->
+          <div class="tab-group" id="visualizerTabs">
+            <button class="tab-btn active" data-mode="pianoroll" title="Falling Notes & Piano Roll">🎹 Piano Roll</button>
+            <button class="tab-btn" data-mode="spectrum" title="FFT Spectrum & Oscilloscope">📊 Spectrum</button>
+            <button class="tab-btn" data-mode="radial" title="Radial Cyberpunk Visualizer">🌀 Radial</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-Time Visualizer Canvas Container -->
+      <div class="visualizer-container">
+        <canvas id="visualizerCanvas"></canvas>
+      </div>
+
+      <!-- Transport Controls Bar -->
+      <div class="transport-bar">
+        <!-- Timeline Seek Bar -->
+        <div class="timeline-row">
+          <span id="currentTimeLabel" class="time-label">00:00</span>
+          <div class="seekbar-wrapper">
+            <input type="range" id="seekBar" class="seek-slider" min="0" max="100" value="0" step="0.1">
+            <div id="seekProgress" class="seek-progress-fill"></div>
+          </div>
+          <span id="durationLabel" class="time-label">00:00</span>
+        </div>
+
+        <!-- Buttons Row -->
+        <div class="controls-row">
+          <!-- Left Extra Controls -->
+          <div class="controls-group controls-left">
+            <button id="loopBtn" class="control-btn toggle-btn" title="Toggle Loop (L)">
+              <span class="icon">🔁</span>
+            </button>
+            <div class="speed-control">
+              <label for="speedSelect">Speed</label>
+              <select id="speedSelect" class="speed-select">
+                <option value="0.5">0.5x</option>
+                <option value="0.75">0.75x</option>
+                <option value="1.0" selected>1.0x</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Center Transport Buttons (REV, PLAY/PAUSE, STOP, FWD) -->
+          <div class="controls-group controls-center">
+            <button id="prevTrackBtn" class="control-btn" title="Previous Track (P)">
+              <span class="icon">⏮</span>
+            </button>
+
+            <!-- REV: Rewind 5s -->
+            <button id="rewindBtn" class="control-btn transport-btn" title="Rewind 5s (Left Arrow / J)">
+              <span class="icon">⏪</span>
+              <span class="btn-subtext">5s</span>
+            </button>
+
+            <!-- PLAY / PAUSE (Main Button) -->
+            <button id="playPauseBtn" class="control-btn play-btn" title="Play / Pause (Space)">
+              <span class="play-icon icon">▶</span>
+            </button>
+
+            <!-- STOP -->
+            <button id="stopBtn" class="control-btn transport-btn" title="Stop (S)">
+              <span class="icon">⏹</span>
+            </button>
+
+            <!-- FWD: Fast Forward 5s -->
+            <button id="forwardBtn" class="control-btn transport-btn" title="Forward 5s (Right Arrow / L)">
+              <span class="icon">⏩</span>
+              <span class="btn-subtext">5s</span>
+            </button>
+
+            <button id="nextTrackBtn" class="control-btn" title="Next Track (N)">
+              <span class="icon">⏭</span>
+            </button>
+          </div>
+
+          <!-- Right Controls: Volume -->
+          <div class="controls-group controls-right">
+            <button id="muteBtn" class="control-btn toggle-btn" title="Mute / Unmute (M)">
+              <span class="icon" id="volumeIcon">🔊</span>
+            </button>
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1.5" step="0.05" value="0.85" title="Master Volume">
+            <span id="volumePercent" class="volume-text">85%</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Instrument Rack & Mixer (Featuring all 8+ Instruments) -->
+    <section class="mixer-section">
+      <div class="mixer-header">
+        <div class="mixer-title-row">
+          <h3>🎛️ MULTI-TRACK INSTRUMENT MIXER</h3>
+          <span class="badge badge-accent">All 8+ Instruments Active</span>
+        </div>
+        <div class="mixer-actions">
+          <button id="unmuteAllBtn" class="btn btn-sm btn-ghost">Reset All Mutes</button>
+          <button id="resetMixerBtn" class="btn btn-sm btn-ghost">Reset Levels & Pans</button>
+        </div>
+      </div>
+
+      <!-- Channel Strips Grid -->
+      <div class="channel-rack" id="channelRack">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- Keyboard Shortcuts Modal -->
+    <div id="shortcutsModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>⌨️ Keyboard Shortcuts</h3>
+          <button id="closeShortcutsBtn" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="shortcuts-table">
+            <tr><td><kbd>Space</kbd></td><td>Play / Pause</td></tr>
+            <tr><td><kbd>S</kbd></td><td>Stop playback</td></tr>
+            <tr><td><kbd>←</kbd> or <kbd>J</kbd></td><td>Rewind 5 seconds</td></tr>
+            <tr><td><kbd>→</kbd> or <kbd>L</kbd></td><td>Forward 5 seconds</td></tr>
+            <tr><td><kbd>↑</kbd> / <kbd>↓</kbd></td><td>Volume Up / Down</td></tr>
+            <tr><td><kbd>M</kbd></td><td>Toggle Mute</td></tr>
+            <tr><td><kbd>R</kbd></td><td>Toggle Loop</td></tr>
+            <tr><td><kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd></td><td>Switch to Song 1, 2, or 3</td></tr>
+            <tr><td><kbd>O</kbd></td><td>Open MIDI file from disk</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="songs-data.js"></script>
+  <script src="midi-parser.js"></script>
+  <script src="synth-engine.js"></script>
+  <script src="player.js"></script>
+  <script src="visualizer.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

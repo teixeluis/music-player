@@ -1,0 +1,947 @@
+/* ========================================================
+   NEON MIDI STUDIO - Modern Dark Audio Workstation Styling
+   ======================================================== */
+
+:root {
+  --bg-main: #0b0f17;
+  --bg-card: #131924;
+  --bg-card-hover: #1a2232;
+  --bg-strip: #182030;
+  --bg-slider: #252f44;
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: #3b82f6;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --cyan: #06b6d4;
+  --cyan-glow: rgba(6, 182, 212, 0.4);
+  --purple: #8b5cf6;
+  --purple-glow: rgba(139, 92, 246, 0.4);
+  --pink: #ec4899;
+  --pink-glow: rgba(236, 72, 153, 0.4);
+  --amber: #f59e0b;
+  --emerald: #10b981;
+  --red: #ef4444;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+/* App Container */
+.app-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem 3rem 1.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ========================================================
+   Header
+   ======================================================== */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px var(--purple-glow));
+}
+
+.brand-text h1 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: linear-gradient(135deg, #f8fafc, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-icon {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+}
+
+.btn-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.btn-ghost:hover {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.badge-info {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.badge-genre {
+  background: rgba(139, 92, 246, 0.15);
+  color: #c084fc;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.badge-bpm {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.badge-instruments {
+  background: rgba(6, 182, 212, 0.15);
+  color: #22d3ee;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.badge-accent {
+  background: rgba(236, 72, 153, 0.15);
+  color: #f472b6;
+  border: 1px solid rgba(236, 72, 153, 0.3);
+}
+
+/* ========================================================
+   Song Selector Carousel
+   ======================================================== */
+.songs-selector-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.songs-carousel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) auto;
+  gap: 0.85rem;
+}
+
+@media (max-width: 900px) {
+  .songs-carousel {
+    grid-template-columns: 1fr;
+  }
+}
+
+.song-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.song-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.song-card.active {
+  border-color: var(--cyan);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.12), rgba(139, 92, 246, 0.08));
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+.song-card.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--cyan);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.card-genre {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.card-instruments-summary {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* ========================================================
+   Player Stage & Visualizer
+   ======================================================== */
+.player-stage {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.song-meta-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.song-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.song-title-row h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.song-description {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  max-width: 780px;
+  line-height: 1.4;
+}
+
+/* Visualizer Tabs */
+.tab-group {
+  display: flex;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.tab-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.tab-btn.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Visualizer Canvas */
+.visualizer-container {
+  width: 100%;
+  height: 340px;
+  background: #0f141c;
+  position: relative;
+  overflow: hidden;
+}
+
+#visualizerCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ========================================================
+   Transport Controls Bar
+   ======================================================== */
+.transport-bar {
+  padding: 1rem 1.5rem;
+  background: #101621;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* Seek Bar & Timeline */
+.timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.time-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 45px;
+}
+
+.seekbar-wrapper {
+  position: relative;
+  flex: 1;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.seek-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--bg-slider);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.seek-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #f8fafc;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px var(--cyan-glow);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.seek-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+}
+
+.seek-progress-fill {
+  position: absolute;
+  left: 0;
+  top: 7px;
+  height: 6px;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  border-radius: 3px 0 0 3px;
+  pointer-events: none;
+  z-index: 1;
+  width: 0%;
+}
+
+/* Controls Row */
+.controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.controls-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.controls-center {
+  gap: 0.85rem;
+}
+
+/* Control Buttons */
+.control-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.control-btn:active {
+  transform: translateY(1px);
+}
+
+.control-btn.active {
+  background: rgba(6, 182, 212, 0.2);
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+/* REV & FWD Buttons */
+.transport-btn {
+  width: 44px;
+  height: 44px;
+  position: relative;
+}
+
+.transport-btn .icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.btn-subtext {
+  font-size: 0.6rem;
+  font-weight: 700;
+  margin-top: 1px;
+  color: var(--text-secondary);
+}
+
+/* Main PLAY / PAUSE Button */
+.play-btn {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  border: none;
+  box-shadow: 0 0 25px rgba(6, 182, 212, 0.45);
+}
+
+.play-btn:hover {
+  box-shadow: 0 0 35px rgba(6, 182, 212, 0.7);
+  transform: scale(1.05);
+}
+
+.play-btn:active {
+  transform: scale(0.96);
+}
+
+.play-btn .icon {
+  font-size: 1.6rem;
+  color: #fff;
+}
+
+/* Speed and Volume Controls */
+.speed-control {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.speed-select {
+  background: transparent;
+  color: var(--text-primary);
+  border: none;
+  font-weight: 600;
+  font-size: 0.75rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.speed-select option {
+  background: #182030;
+  color: #fff;
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 85px;
+  height: 5px;
+  background: var(--bg-slider);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #f8fafc;
+  cursor: pointer;
+}
+
+.volume-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  min-width: 36px;
+}
+
+/* ========================================================
+   Instrument Rack & Mixer
+   ======================================================== */
+.mixer-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mixer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mixer-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mixer-title-row h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.mixer-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Channel Rack Grid */
+.channel-rack {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.85rem;
+}
+
+.channel-strip {
+  background: var(--bg-strip);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.channel-strip:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: #1c2638;
+}
+
+.channel-strip.is-muted {
+  opacity: 0.55;
+  filter: grayscale(0.5);
+}
+
+.channel-color-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+}
+
+.strip-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.strip-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.strip-icon {
+  font-size: 1.35rem;
+}
+
+.strip-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.strip-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.strip-channel-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* Live Note Activity LED */
+.led-meter {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.led-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #252f44;
+  transition: background 0.08s ease, box-shadow 0.08s ease;
+}
+
+.led-indicator.active {
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan), 0 0 20px var(--cyan);
+}
+
+/* Strip Controls (Mute / Solo / Faders) */
+.strip-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.btn-mute, .btn-solo {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.04);
+  font-weight: 700;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-secondary);
+}
+
+.btn-mute:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.btn-mute.active {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+.btn-solo:hover {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--amber);
+  border-color: var(--amber);
+}
+
+.btn-solo.active {
+  background: var(--amber);
+  color: #000;
+  border-color: var(--amber);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+}
+
+.faders-row {
+  display: flex;
+  flex: 1;
+  gap: 0.75rem;
+}
+
+.fader-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.2rem;
+}
+
+.fader-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.fader-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--bg-slider);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.fader-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  cursor: pointer;
+}
+
+/* ========================================================
+   Drop Overlay & Modal
+   ======================================================== */
+.drop-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 15, 23, 0.92);
+  border: 4px dashed var(--cyan);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.drop-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.drop-content {
+  text-align: center;
+}
+
+.drop-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: bounce 1s infinite alternate ease-in-out;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-15px); }
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(6px);
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  width: 90%;
+  max-width: 480px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 1.25rem 1.5rem;
+}
+
+.shortcuts-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.shortcuts-table td {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 0.85rem;
+}
+
+kbd {
+  background: #252f44;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--cyan);
+}
