@@ -19,7 +19,11 @@ Open `index.html` directly in Google Chrome, Firefox, Safari, or Microsoft Edge.
 
 ## 🎵 Features
 
+
 ### 1. Full Player Transport Controls
+
+![Player](docs/images/player.png)
+
 - **Play / Pause**: Large center glowing button or <kbd>Space</kbd>.
 - **Stop**: Immediately stops audio, silences active voices, and resets playhead to `00:00` (<kbd>S</kbd>).
 - **Rewind (REV)**: Skips backward by 5 seconds with instant audio resync (<kbd>←</kbd> or <kbd>J</kbd>).
@@ -31,6 +35,9 @@ Open `index.html` directly in Google Chrome, Firefox, Safari, or Microsoft Edge.
 - **Master Volume & Mute**: Slider (0% to 150%) with dynamic speaker icon (<kbd>M</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>).
 
 ### 2. Three Multi-Instrument MIDI Songs (Generated at your discretion)
+
+![MIDI songs](docs/images/midi_songs.png)
+
 Each song features **at least 8 distinct instruments** (9 active musical tracks each):
 
 | Song | Genre | BPM | Featured Instruments (9 tracks) |
@@ -40,11 +47,17 @@ Each song features **at least 8 distinct instruments** (9 active musical tracks 
 | **3. Midnight Jazz Lounge** | Smooth Jazz / Bossa Nova | 96 | 1. Upright Acoustic Bass<br>2. Jazz Grand Piano<br>3. Tenor Saxophone<br>4. Jazz Electric Guitar<br>5. Vibraphone<br>6. Jazz Flute<br>7. Drawbar Organ (Hammond B3)<br>8. Muted Trumpet<br>9. Jazz Drums (Brushes/Ride) |
 
 ### 3. Open Custom MIDI Files
+
+![Custom file](docs/images/custom_file.png)
+
 - **File Picker**: Click `📁 Open MIDI` to select any `.mid` or `.midi` file from your computer.
 - **Drag & Drop**: Drag any MIDI file anywhere onto the browser window.
 - **Save / Export**: Click `💾 Download .MID` to save the active song file to your hard drive.
 
 ### 4. Multi-Track Instrument Rack & Mixer
+
+![Multi-track mixer](docs/images/multi_track_mixer.png)
+
 - Dedicated channel strip for each of the active instruments.
 - **Live LED Activity Meter**: Glows in real time when notes are sounding on that instrument.
 - **Mute (M)** and **Solo (S)** toggles per instrument.
@@ -52,6 +65,9 @@ Each song features **at least 8 distinct instruments** (9 active musical tracks 
 - **Stereo Pan Knob** (L 100% to R 100%) per instrument.
 
 ### 5. Multi-Mode Canvas Visualizer
+
+![Visualizer](docs/images/visualizer.png)
+
 - **Piano Roll View**: Falling notes display with active 88-key virtual piano keyboard, color-coded per instrument.
 - **Spectrum Analyzer**: Real-time 64-band FFT audio spectrum with peak meters and oscilloscope waveform overlay.
 - **Radial Cyberpunk**: Circular pulsing frequency visualizer.
